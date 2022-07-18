@@ -17,10 +17,12 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+<!--
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			&lt;!&ndash;<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>&ndash;&gt;
 		</dependency>
+-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -89,8 +91,8 @@
 								<goal>install-node-and-npm</goal>
 							</goals>
 							<configuration>
-								<nodeVersion>v15.4.0</nodeVersion>
-								<npmVersion>7.3.0</npmVersion>
+								<nodeVersion>v16.14.2</nodeVersion>
+								<npmVersion>8.11.0</npmVersion>
 							</configuration>
 						</execution>
 						<execution>
@@ -109,6 +111,29 @@
 							</goals>
 							<configuration>
 								<arguments>run build</arguments>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<!-- maven for coping into the static folder-->
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>copy-build-folder</id>
+							<phase>process-classes</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<resources>
+									<resource>
+										<directory>src/frontend/build</directory>
+									</resource>
+
+								</resources>
+								<outputDirectory>${basedir}/target/classes/static</outputDirectory>
 							</configuration>
 						</execution>
 					</executions>
